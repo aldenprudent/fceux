@@ -20,9 +20,89 @@
 static uint32 lcdCompZapperStrobe[2];
 static uint32 lcdCompZapperData[2];
 
+const uint8 CHEATZAP_LIGHT_ON = 0;
+const uint8 CHEATZAP_TRIGGER_ON = 24;
+const uint8 CHEATZAP_BOTH_ON = 16;
+const uint8 CHEATZAP_BOTH_OFF = 8;
+
+uint32 last = 3;
+bool inProcess = false;
+short state = 0;
+int count = 0;
+
 static uint8 ReadLCDCompZapper(int w)
 {
+	if (inProcess) {
+		count++;
+
+		if (state == 0) {
+			if (count == 45) {
+				state = 1;
+				count = 0;
+			}
+
+			return 24;
+		}
+
+		if (state == 1) {
+			if (count == 2750) {
+				state = 2;
+				count = 0;
+			}
+
+			return 8;
+		}
+
+		if (state == 2) {
+			state = 3;
+			count = 0;
+
+			return 0;
+		}
+
+		if (state == 3) {
+			state = 0;
+			count = 0;
+			inProcess = false;
+
+			return 8;
+		}
+	}
+
+	if (lcdCompZapperData[1] != last)
+	{
+		printf("lcdCompZapperData[1]=%d ", lcdCompZapperData[1]);
+		switch (lcdCompZapperData[1]) {
+		case CHEATZAP_LIGHT_ON:
+			printf("LIGHT_ON");
+			break;
+		case CHEATZAP_TRIGGER_ON:
+			printf("CHEATZAP_TRIGGER_ON");
+			break;
+		case CHEATZAP_BOTH_ON:
+			printf("CHEATZAP_BOTH_ON");
+			break;
+		case CHEATZAP_BOTH_OFF:
+			printf("CHEATZAP_BOTH_OFF");
+			break;
+		}
+
+		printf("\n");
+		last = lcdCompZapperData[1];
+	}
+
+	if (lcdCompZapperData[w] == CHEATZAP_TRIGGER_ON)
+	{
+		inProcess = true;
+		state = 0;
+		count = 1;
+		return 24;
+	}
+
 	return lcdCompZapperData[w];
+	// return CHEATZAP_LIGHT_ON;
+	// return CHEATZAP_TRIGGER_ON;
+	// return CHEATZAP_BOTH_ON;
 }
 
 static void StrobeLCDCompZapper(int w)

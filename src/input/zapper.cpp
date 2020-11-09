@@ -150,6 +150,9 @@ static void StrobeZapperVS(int w)
 	ZD[w].zap_readbit=0;
 }
 
+uint32 _zlast = 3;
+uint32 _zcnt = 0;
+
 static uint8 ReadZapper(int w)
 {
 	uint8 ret=0;
@@ -157,6 +160,15 @@ static uint8 ReadZapper(int w)
 		ret|=0x10;
 	if(CheckColor(w))
 		ret|=0x8;
+
+	_zcnt++;
+	if (ret != _zlast)
+	{
+		printf("ret = %d; cnt=%d\n", ret, _zcnt);
+		_zlast = ret;
+		_zcnt = 0;
+	}
+
 	return ret;
 }
 
