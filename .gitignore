@@ -43,3 +43,18 @@ fceux-net-server
 
 # typical CMake build directory
 /build
+CMakeCache.txt
+CMakeFiles/
+Makefile
+*.cmake
+
+# OSX build output
+src/CMakeFiles/
+src/Makefile
+src/cmake_install.cmake
+src/fceux.app/
+src/fceux_autogen/
+src/fceux_git_info.cpp
+
+# generated files
+src/input/remotegun.*
