@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package remote;
+
+service RemoteGun {
+    rpc Fire(FireMessage) returns (FireAcknowledged) {}
+}
+
+message FireMessage {
+    bool is_hit = 1;
+    float prob = 2;
+}
+
+message FireAcknowledged {
+
+}

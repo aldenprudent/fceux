@@ -98,8 +98,8 @@ else(WIN32)
      # Use Internal LUA
      add_definitions( -D_S9XLUA_H  -I${CMAKE_CURRENT_SOURCE_DIR}/lua/src )
 
-	  set( LUA_ENGINE_SOURCE  
-        ${CMAKE_CURRENT_SOURCE_DIR}/lua/src/lapi.c 
+	  set( LUA_ENGINE_SOURCE
+        ${CMAKE_CURRENT_SOURCE_DIR}/lua/src/lapi.c
         ${CMAKE_CURRENT_SOURCE_DIR}/lua/src/lauxlib.c
         ${CMAKE_CURRENT_SOURCE_DIR}/lua/src/lbaselib.c
         ${CMAKE_CURRENT_SOURCE_DIR}/lua/src/lcode.c
@@ -129,12 +129,12 @@ else(WIN32)
         ${CMAKE_CURRENT_SOURCE_DIR}/lua/src/lvm.c
         ${CMAKE_CURRENT_SOURCE_DIR}/lua/src/lzio.c
         ${CMAKE_CURRENT_SOURCE_DIR}/lua/src/print.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/lua-engine.cpp 
+        ${CMAKE_CURRENT_SOURCE_DIR}/lua-engine.cpp
      )
   endif()
 
   add_definitions( -DHAVE_ASPRINTF ) # What system wouldn't have this?
-  #add_definitions( -DCREATE_AVI    ) 
+  #add_definitions( -DCREATE_AVI    )
 
   if(APPLE)
 	set( OPENGL_LDFLAGS  "-framework OpenGL" )
@@ -376,11 +376,11 @@ set(SRC_CORE
   	${CMAKE_CURRENT_SOURCE_DIR}/utils/backward.cpp
   	${CMAKE_CURRENT_SOURCE_DIR}/utils/ConvertUTF.c
   	${CMAKE_CURRENT_SOURCE_DIR}/utils/xstring.cpp
-  	${CMAKE_CURRENT_SOURCE_DIR}/utils/crc32.cpp     
-  	${CMAKE_CURRENT_SOURCE_DIR}/utils/endian.cpp  
-  	${CMAKE_CURRENT_SOURCE_DIR}/utils/general.cpp  
-  	${CMAKE_CURRENT_SOURCE_DIR}/utils/guid.cpp    
-  	${CMAKE_CURRENT_SOURCE_DIR}/utils/md5.cpp  
+  	${CMAKE_CURRENT_SOURCE_DIR}/utils/crc32.cpp
+  	${CMAKE_CURRENT_SOURCE_DIR}/utils/endian.cpp
+  	${CMAKE_CURRENT_SOURCE_DIR}/utils/general.cpp
+  	${CMAKE_CURRENT_SOURCE_DIR}/utils/guid.cpp
+  	${CMAKE_CURRENT_SOURCE_DIR}/utils/md5.cpp
   	${CMAKE_CURRENT_SOURCE_DIR}/utils/memory.cpp
 )
 
@@ -422,54 +422,93 @@ set(SRC_DRIVERS_SDL
 )
 else()
 set(SRC_DRIVERS_SDL
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/main.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleWindow.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleViewerGL.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleViewerSDL.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/GamePadConf.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/HotKeyConf.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/PaletteConf.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/GuiConf.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/MoviePlay.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/MovieOptions.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/LuaControl.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/CheatsConf.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/GameGenie.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/HexEditor.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/CodeDataLogger.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/SymbolicDebug.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleDebugger.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleUtilities.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleVideoConf.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleSoundConf.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/iNesHeaderEditor.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/TraceLogger.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/AboutWindow.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/fceuWrapper.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ppuViewer.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/NameTableViewer.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/RamWatch.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/RamSearch.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/config.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/input.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/nes_shm.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/keyscan.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/sdl-sound.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/sdl-video.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/sdl-joystick.cpp  
-  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/sdl-throttle.cpp  
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/main.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleWindow.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleViewerGL.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleViewerSDL.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/GamePadConf.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/HotKeyConf.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/PaletteConf.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/GuiConf.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/MoviePlay.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/MovieOptions.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/LuaControl.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/CheatsConf.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/GameGenie.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/HexEditor.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/CodeDataLogger.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/SymbolicDebug.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleDebugger.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleUtilities.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleVideoConf.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ConsoleSoundConf.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/iNesHeaderEditor.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/TraceLogger.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/AboutWindow.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/fceuWrapper.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/ppuViewer.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/NameTableViewer.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/RamWatch.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/RamSearch.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/config.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/input.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/nes_shm.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/keyscan.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/sdl-sound.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/sdl-video.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/sdl-joystick.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/sdl-throttle.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/drivers/Qt/unix-netplay.cpp
 )
 endif()
 
 set(SOURCES ${SRC_CORE} ${SRC_DRIVERS_COMMON} ${SRC_DRIVERS_SDL})
 
-add_custom_command( 
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/fceux_git_info.cpp  
-	COMMAND  ${CMAKE_SOURCE_DIR}/scripts/genGitHdr.sh  ${CMAKE_CURRENT_BINARY_DIR} 
+add_custom_command(
+	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/fceux_git_info.cpp
+	COMMAND  ${CMAKE_SOURCE_DIR}/scripts/genGitHdr.sh  ${CMAKE_CURRENT_BINARY_DIR}
 	VERBATIM )
 
 set_property(SOURCE ${CMAKE_CURRENT_BINARY_DIR}/fceux_git_info.cpp PROPERTY SKIP_AUTOGEN ON)
+
+# -- grpc dep
+set(protobuf_MODULE_COMPATIBLE TRUE)
+find_package(Protobuf CONFIG REQUIRED)
+message(STATUS "Using protobuf ${Protobuf_VERSION}")
+
+set(_PROTOBUF_LIBPROTOBUF protobuf::libprotobuf)
+set(_REFLECTION gRPC::grpc++_reflection)
+set(_PROTOBUF_PROTOC $<TARGET_FILE:protobuf::protoc>)
+
+# Find gRPC installation
+# Looks for gRPCConfig.cmake file installed by gRPC's cmake installation.
+find_package(gRPC CONFIG REQUIRED)
+message(STATUS "Using gRPC ${gRPC_VERSION}")
+
+set(_GRPC_GRPCPP gRPC::grpc++)
+set(_GRPC_CPP_PLUGIN_EXECUTABLE $<TARGET_FILE:gRPC::grpc_cpp_plugin>)
+
+# Proto file
+get_filename_component(rg_proto "../protobuf/remotegun.proto" ABSOLUTE)
+get_filename_component(rg_proto_path "${rg_proto}" PATH)
+
+# Generated sources
+set(rg_proto_srcs "${CMAKE_CURRENT_BINARY_DIR}/input/remotegun.pb.cc")
+set(rg_proto_hdrs "${CMAKE_CURRENT_BINARY_DIR}/input/remotegun.pb.h")
+set(rg_grpc_srcs "${CMAKE_CURRENT_BINARY_DIR}/input/remotegun.grpc.pb.cc")
+set(rg_grpc_hdrs "${CMAKE_CURRENT_BINARY_DIR}/input/remotegun.grpc.pb.h")
+
+add_custom_command(
+      OUTPUT "${rg_proto_srcs}" "${rg_proto_hdrs}" "${rg_grpc_srcs}" "${rg_grpc_hdrs}"
+      COMMAND ${_PROTOBUF_PROTOC}
+      ARGS --grpc_out "${CMAKE_CURRENT_BINARY_DIR}/input"
+        --cpp_out "${CMAKE_CURRENT_BINARY_DIR}/input"
+        -I "${rg_proto_path}"
+        --plugin=protoc-gen-grpc="${_GRPC_CPP_PLUGIN_EXECUTABLE}"
+        "${rg_proto}"
+      DEPENDS "${rg_proto}")
+
+# /-- grpc
 
 if (APPLE)
 
@@ -477,22 +516,22 @@ set(MACOSX_BUNDLE_ICON_FILE fceux.icns)
 set(APP_ICON  ${CMAKE_SOURCE_DIR}/fceux.icns )
 set_source_files_properties( ${APP_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources" )
 
-add_executable(  ${APP_NAME}  MACOSX_BUNDLE ${APP_ICON} ${SOURCES} ../resources.qrc 
-	${CMAKE_CURRENT_BINARY_DIR}/fceux_git_info.cpp)
+add_executable(  ${APP_NAME}  MACOSX_BUNDLE ${APP_ICON} ${SOURCES} ../resources.qrc
+	${CMAKE_CURRENT_BINARY_DIR}/fceux_git_info.cpp ${rg_proto_srcs} ${rg_grpc_srcs})
 
 else()
 
    if ( ${GTK} )
-      add_executable(  ${APP_NAME}  ${SOURCES} 
+      add_executable(  ${APP_NAME}  ${SOURCES}
    	   ${CMAKE_CURRENT_BINARY_DIR}/fceux_git_info.cpp)
    else()
-      add_executable(  ${APP_NAME}  ${SOURCES} ../resources.qrc 
+      add_executable(  ${APP_NAME}  ${SOURCES} ../resources.qrc
    	   ${CMAKE_CURRENT_BINARY_DIR}/fceux_git_info.cpp)
    endif()
 endif()
 
 if ( ${GTK} )
-   target_link_libraries( ${APP_NAME}  
+   target_link_libraries( ${APP_NAME}
    ${GTK3_LDFLAGS} ${X11_LDFLAGS}
    ${OPENGL_LDFLAGS}
  	${SDL2_LDFLAGS}
@@ -501,7 +540,7 @@ if ( ${GTK} )
  	${SYS_LIBS}
 )
 else()
-target_link_libraries( ${APP_NAME}  
+target_link_libraries( ${APP_NAME}
    ${Qt5Widgets_LIBRARIES}
    ${Qt5OpenGL_LIBRARIES}
    ${OPENGL_LDFLAGS}
@@ -509,13 +548,16 @@ target_link_libraries( ${APP_NAME}
 	${MINIZIP_LDFLAGS} ${ZLIB_LIBRARIES}
 	${LUA_LDFLAGS}
  	${SYS_LIBS}
+	${_REFLECTION}
+    ${_GRPC_GRPCPP}
+    ${_PROTOBUF_LIBPROTOBUF}
 )
 endif()
 
 if (APPLE)
 
-install( TARGETS  ${APP_NAME}  
-	BUNDLE  DESTINATION  . COMPONENT Runtime 
+install( TARGETS  ${APP_NAME}
+	BUNDLE  DESTINATION  . COMPONENT Runtime
 	RUNTIME  DESTINATION  bin COMPONENT Runtime )
 
 # Use \$ to defer expansion until install script is called; CPack will call it with its own CMAKE_INSTALL_PREFIX
@@ -527,7 +569,7 @@ include(CPACK)
 
 # macdeployqt tool that comes with Qt: https://doc.qt.io/qt-5/macos-deployment.html#macdeploy
 # Compared to fixup_bundle, correctly finds and installs Qt-specific resources as well as non-Qt dependencies
-find_program(MACDEPLOYQT macdeployqt)
+find_program(MACDEPLOYQT /usr/local/opt/qt/bin/macdeployqt)
 if(NOT MACDEPLOYQT)
 	message(FATAL_ERROR "Could not find macdeployqt executable")
 endif()
@@ -541,7 +583,7 @@ install( CODE "
 
 else(APPLE)
 
-install( TARGETS  ${APP_NAME}  
+install( TARGETS  ${APP_NAME}
 	RUNTIME  DESTINATION  bin )
 
 install( FILES     ${CMAKE_CURRENT_SOURCE_DIR}/auxlib.lua                DESTINATION share/fceux/luaScripts  )
