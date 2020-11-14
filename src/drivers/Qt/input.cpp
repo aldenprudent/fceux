@@ -1315,6 +1315,7 @@ void InitInputInterface ()
 
    memset( g_keyState, 0, sizeof(g_keyState) );
 
+   /*
 	for (t = 0, x = 0; x < 2; x++)
 	{
 		attrib = 0;
@@ -1347,6 +1348,10 @@ void InitInputInterface ()
 		}
 		FCEUI_SetInput (x, (ESI) CurInputType[x], InputDPtr, attrib);
 	}
+    */
+   // hardcoded lcd zapper
+   FCEUI_SetInput(0, SI_GAMEPAD, &JSreturn, 0);
+   FCEUI_SetInput(1, SI_LCDCOMP_ZAPPER, &JSreturn, 0);
 
 	attrib = 0;
 	InputDPtr = 0;
@@ -2041,6 +2046,9 @@ UpdateInput (Config * config)
 			UsrInputType[i] = SI_NONE;
 		}
 	}
+
+    // hard code input == LCD Zapper for port #2
+	UsrInputType[1] = SI_LCDCOMP_ZAPPER;
 
 	// update each of the devices' configuration structure
 	// XXX soules - this is temporary until this file is cleaned up to
